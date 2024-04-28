@@ -10,6 +10,19 @@ export const signUp = createAsyncThunk("auth/signup", async (signUpInfo, {reject
     })
 })
 
+export const signIn = createAsyncThunk("/auth/signin", async (signInInfo, {rejectWithValue}) => {
+  try {
+    const res = await axios.post("http://localhost:8800/users/signin", signInInfo);
+    const {accessToken, user} = res.data;
+    const userToken = {accessToken, user};
+    localStorage.setItem("user", JSON.stringify(userToken));
+    return userToken;
+  }
+  catch (err) {
+    throw rejectWithValue(err.response.data.message);
+  } 
+})
+
 const authSlice = createSlice({
     name: "auth",
     initialState: {
@@ -23,6 +36,7 @@ const authSlice = createSlice({
     reducers: {
       clearMessage: (state) => {
         state.signUpError = [];
+        state.signInError = null;
       }
     },
     extraReducers: (builder) => {
@@ -32,6 +46,19 @@ const authSlice = createSlice({
       })
       builder.addCase(signUp.rejected, (state, action) => {
         state.signUpError = action.payload;
+      })
+
+      builder.addCase(signIn.fulfilled, (state, action) => {
+        state.userInfo = action.payload;
+        state.accessToken = action.payload.accessToken;
+        state.signInSuccess = "Signed in successfully.";
+        state.signInError = null;
+      })
+      builder.addCase(signIn.rejected, (state, action) => {
+        state.userInfo = null;
+        state.accessToken = null;
+        state.signInError = action.payload;
+        state.signInSuccess = null;
       })
     },
 })     

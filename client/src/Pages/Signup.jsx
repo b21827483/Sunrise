@@ -76,8 +76,8 @@ function Signup() {
                         </div>
                     </div>
                     <div className="flex justify-evenly items-center my-2">
-                        <button type="button" className="p-2"><Link to={"/signin"}>signin</Link></button>
-                        <button className="p-2 hover:bg-red-600 hover:text-yellow-400 transition-all delay-100 ease-linear">signup</button>
+                        <Link to={"/signin"} className="text-black border-b-2 border-black hover:text-red-400 hover:border-red-400">Sign In</Link>
+                        <button className="p-2 hover:bg-red-600 hover:text-yellow-400 transition-all delay-100 ease-linear">Sign Up</button>
                     </div>
                     {signUpError &&
                         <div>

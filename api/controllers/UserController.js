@@ -1,13 +1,14 @@
 import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
 import {User} from "../models/UserModel.js";
 
+dotenv.config();
+
 export const addUser = async (req, res, next) => {
-    console.log("add user")
     let newUser;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    const role = "user";
 
     newUser = new User({
         username: req.body.username,
@@ -30,3 +31,29 @@ export const addUser = async (req, res, next) => {
         });
     }
 };
+
+export const signIn = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const existingUser = await User.findOne({email: {$eq: email}});
+
+        if (!existingUser) {
+            return res.status(400).json({message: "Username and/or password is invalid."});
+        }
+
+        const isPasswordValid = bcrypt.compareSync(password, existingUser.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({message: "Username and/or password is invalid."});
+        }
+
+        const accessToken = jwt.sign({id: existingUser.id, email: email}, process.env.SECRET_KEY, {
+            expiresIn: "5h",
+        });
+
+        res.status(200).json({accessToken: accessToken, user: {user_id: existingUser._id, email: existingUser.email, username: existingUser.username, profilePic: existingUser.profilePic}})
+    } 
+    catch (err) {
+        return res.status(500).json({message: "Error has occured during sign up process."});
+    }
+    
+}

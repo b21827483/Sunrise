@@ -6,7 +6,11 @@ export const checkSignupValidty = [
         .isLength({min: 2})
         .withMessage("You must enter your name.")
         .trim()
-        .custom((value, {req}) => {
+        .custom(async (value, {req}) => {
+            const isUsernameExist = await User.findOne({username:{$eq: value}});
+            if (isUsernameExist) {
+                throw new Error("This username has already taken.");
+            }
             if (value.length < 3) {
                 throw new Error("Name length must be at least 2 characters long.");
             }
@@ -22,7 +26,7 @@ export const checkSignupValidty = [
         .withMessage("Enter a valid email address.")
         .custom(async (value, {req}) => {
             try {
-                const isExist = await User.findOne({email: value});
+                const isExist = await User.findOne({email: {$eq: value}});
                 if (isExist) {
                     throw new Error("Entered email already registered to another user.")
                 }
