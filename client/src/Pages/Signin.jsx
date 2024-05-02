@@ -1,7 +1,6 @@
 import { useState } from "react"
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import axios from "axios";
+import {Link, useNavigate} from "react-router-dom";
 
 import { clearMessage, signIn } from "../redux/AuthSlice";
 
@@ -14,6 +13,7 @@ function Signin() {
     const signInError = useSelector(state => state.auth?.signInError);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     function clearNotificationHandler() {
         dispatch(clearMessage());
@@ -21,9 +21,17 @@ function Signin() {
 
     async function signinSubmitHandler(event) {
         event.preventDefault();
-        setIsLoading(true);
-        await dispatch(signIn({email: email, password: password}));
-        setIsLoading(false);
+        try {
+            setIsLoading(true);
+            await dispatch(signIn({email: email, password: password}));
+            navigate("/");
+        }
+        catch (err) {
+            console.log("err");
+        }
+        finally {
+            setIsLoading(false)
+        }
     }
 
     return (
