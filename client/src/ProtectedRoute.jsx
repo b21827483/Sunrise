@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
+import Navbar from "./components/Bars/Navbar";
+
 function ProtectedRoute({userInfo}) {
     
     const isLoggedIn = useMemo(() => {
@@ -14,7 +16,8 @@ function ProtectedRoute({userInfo}) {
 
     return (
         isLoggedIn(userInfo, accessToken) ? (
-            <div>
+            <div className="w-screen">
+                <Navbar userInfo={userInfo} />
                 <div>
                     <Outlet />
                 </div>
