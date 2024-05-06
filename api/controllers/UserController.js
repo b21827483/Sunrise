@@ -48,11 +48,11 @@ export const signIn = async (req, res) => {
             return res.status(400).json({message: "Username and/or password is invalid."});
         }
 
-        const accessToken = jwt.sign({id: existingUser.id, email: email}, process.env.SECRET_KEY, {
+        const accessToken = jwt.sign({id: existingUser._id, email: email}, process.env.SECRET_KEY, {
             expiresIn: "30s",
         });
 
-        const refreshToken = jwt.sign({id: existingUser.id, email: email}, process.env.SECRET_KEY, {
+        const refreshToken = jwt.sign({id: existingUser._id, email: email}, process.env.SECRET_KEY, {
             expiresIn: "1m"
         })
 
@@ -74,6 +74,7 @@ export const signIn = async (req, res) => {
 
 export const refreshToken = async (req, res) => {
     try {
+        console.log("refresh token");
         const {refreshToken} = req.body;
 
         const tokenExist = await Token.findOne({refreshToken: {$eq: refreshToken}});

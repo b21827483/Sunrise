@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-import { User } from "./UserModel.js";
 
 const TokenSchema = new mongoose.Schema({
     user: {
-        ref: User,
+        ref: "User",
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import LeftBar from "./Leftbar";
 
-function Navbar({userInfo}) {
+function Navbar({userInfo, toggleLeftBar}) {
 
     const [dropdown, setDropDown] = useState(false);
 
@@ -10,9 +11,18 @@ function Navbar({userInfo}) {
         setDropDown(prevState => {return !prevState});
     }
 
+    function leftBarHandler() {
+        toggleLeftBar(prevState => {return !prevState});
+    }
+
     return (
-        <div className="sticky bg-blue-500 w-full mb-5 flex justify-between items-center z-100 p-4">
-            <div className="flex items-center gap-4">
+        <div className="fixed top-0 bg-blue-500 w-full flex justify-between items-center z-50 p-4 min-w-[300px]">
+            <span onClick={leftBarHandler} className="absolute lg:hidden hover:bg-gray-200 p-1">
+                <svg rpl="" fill="currentColor" height="20" icon-name="menu-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 10.625H1v-1.25h18v1.25Zm0-7.875H1V4h18V2.75ZM19 16H1v1.25h18V16Z"></path>
+                </svg>
+            </span>
+            <div className="flex items-center gap-4 ml-8 lg:ml-0">
                 <img src="https://cdn3.emoji.gg/emojis/2784-de-communism.png" className="h-12 w-12" />
                 <span className="text-2xl text-white font-bold sm:flex hidden">Sunrise</span>
             </div>

@@ -1,9 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 import Navbar from "./components/Bars/Navbar";
+import LeftBar from "./components/Bars/Leftbar";
 
 function ProtectedRoute({userInfo}) {
+
+    const [toggleLeftBar, setToggleLeftBar] = useState(false);
     
     const isLoggedIn = useMemo(() => {
         return (user, accessToken) => {
@@ -16,10 +19,13 @@ function ProtectedRoute({userInfo}) {
 
     return (
         isLoggedIn(userInfo, accessToken) ? (
-            <div className="w-screen">
-                <Navbar userInfo={userInfo} />
-                <div>
-                    <Outlet />
+            <div className="w-full h-screen">
+                <Navbar userInfo={userInfo} toggleLeftBar={setToggleLeftBar} />
+                <div className="h-full mt-[80px]">
+                    <LeftBar toggle={toggleLeftBar}/>
+                    <div className="lg:w-[calc(100%-256px)] w-full lg:ml-[256px] p-4 "> 
+                        <Outlet />  
+                    </div>
                 </div>
             </div>
         ) : 
