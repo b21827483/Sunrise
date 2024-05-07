@@ -21,9 +21,9 @@ function ProtectedRoute({userInfo}) {
         isLoggedIn(userInfo, accessToken) ? (
             <div className="w-full h-screen">
                 <Navbar userInfo={userInfo} toggleLeftBar={setToggleLeftBar} />
-                <div className="h-full mt-[80px]">
+                <div className="h-full">
                     <LeftBar toggle={toggleLeftBar}/>
-                    <div className="lg:w-[calc(100%-256px)] w-full lg:ml-[256px] p-4 "> 
+                    <div className="lg:w-[calc(100%-256px)] w-full h-full lg:ml-[256px] "> 
                         <Outlet />  
                     </div>
                 </div>

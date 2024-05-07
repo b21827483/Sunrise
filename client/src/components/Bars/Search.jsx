@@ -58,7 +58,7 @@ function Search() {
                         <div>
                             <h2 className="font-semibold flex justify-start ml-2">Subs</h2>
                             <ul className="flex justify-start ml-6">
-                                {subs.map(sub => {return <li key={sub._id}>{sub.name}</li>})}
+                                {subs.map(sub => {return <div className="flex items-center hover:bg-gray-200 w-full p-3"><li className="" key={sub._id}>{sub.name}</li></div>})}
                             </ul>
                         </div>
                     )}   

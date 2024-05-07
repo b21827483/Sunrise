@@ -16,7 +16,7 @@ function Navbar({userInfo, toggleLeftBar}) {
     }
 
     return (
-        <div className="fixed top-0 bg-blue-500 w-full flex justify-between items-center z-50 p-4 min-w-[300px]">
+        <div className="sticky top-0 bg-blue-500 w-full flex justify-between items-center z-50 p-4 min-w-[300px]">
             <span onClick={leftBarHandler} className="absolute lg:hidden hover:bg-gray-200 p-1">
                 <svg rpl="" fill="currentColor" height="20" icon-name="menu-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 10.625H1v-1.25h18v1.25Zm0-7.875H1V4h18V2.75ZM19 16H1v1.25h18V16Z"></path>

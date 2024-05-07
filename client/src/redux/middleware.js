@@ -1,5 +1,5 @@
 import {jwtDecode} from "jwt-decode";
-import { refreshTokenAction } from "./AuthSlice";
+import { refreshTokenAction } from "./Slices/AuthSlice";
 
 export const refreshTokenMiddleware = (store) => next => async (action) => {
         try {

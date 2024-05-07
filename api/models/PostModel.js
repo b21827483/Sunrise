@@ -16,6 +16,18 @@ const PostSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
+    Sub: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Sub",
+        required: true,
+    },
+    likes: {
+        type: Number,
+        default: 0   
+    },
+    comments: [{
+        type: String
+    }]
 })
 
 export const Post = mongoose.model("Post", PostSchema)

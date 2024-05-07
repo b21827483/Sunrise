@@ -5,6 +5,7 @@ import Database from "./database.js";
 
 import UserRoutes from "./routes/UserRoutes.js";
 import SubRoutes from "./routes/SubRoutes.js";
+import PostRoutes from "./routes/PostRoutes.js";
 import { search } from './controllers/SearchController.js';
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.use("/users", UserRoutes);
 app.use("/subs", SubRoutes);
+app.use("/posts", PostRoutes);
 app.get("/search", search);
 
 app.listen(process.env.PORT, () => {

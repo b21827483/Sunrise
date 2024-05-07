@@ -1,8 +1,11 @@
 import './App.css'
 import {Routes, Route} from 'react-router-dom';
+
 import Home from './Pages/Home';
 import Signup from './Pages/Signup';
 import Signin from './Pages/Signin';
+import Sub from './Pages/Sub';
+
 
 import {jwtDecode} from "jwt-decode";
 import {useSelector} from "react-redux";
@@ -23,6 +26,7 @@ function App() {
         <Route element={<ProtectedRoute userInfo={userInfo} />}>
           <Route path="/home" element={<Home />} /> 
           <Route path="/" element={<Home />} /> 
+          <Route path='/sub/:subName' element={<Sub />} />
         </Route>
         <Route path='/signup' element={<Signup />} />
         <Route path='/signin' element={<Signin />} />

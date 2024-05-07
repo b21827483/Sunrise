@@ -53,16 +53,6 @@ export const refreshTokenAction = createAsyncThunk("/auth/refreshToken", async (
   }
 })
 
-const initialState = {
-  userInfo: null,
-  accessToken: null,
-  refreshToken: null,
-  signInError: null,
-  signUpError: [],  
-  signUpSuccess: null,
-  signInSuccess: null
-}
-
 const authSlice = createSlice({
     name: "auth",
     initialState: {

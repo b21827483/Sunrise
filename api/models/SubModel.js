@@ -10,7 +10,9 @@ const SubSchema = new mongoose.Schema({
    subPic: {
         type: String,   
     },
-
+    banner: {
+        type: String,
+    },
     moderators: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

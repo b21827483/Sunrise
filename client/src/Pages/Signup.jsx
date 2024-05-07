@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {signUp, clearMessage} from "../redux/AuthSlice";
+import {signUp, clearMessage} from "../redux/Slices/AuthSlice";
 
 function Signup() {
 

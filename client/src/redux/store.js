@@ -1,6 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
-import authReducer from './AuthSlice';
-import { startAuth } from './AuthSlice';
+import authReducer from './Slices/AuthSlice';
+import PostReducer from "./Slices/PostSlice";
+import SubReducer from './Slices/SubSlice';
 import { persistReducer, persistStore, PERSIST } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { refreshTokenMiddleware } from './middleware';
@@ -14,7 +15,9 @@ const AuthPersistedReducer = persistReducer(persistConfig, authReducer)
 
 const store = configureStore({
     reducer: {
-        auth: AuthPersistedReducer
+        auth: AuthPersistedReducer,
+        post: PostReducer,
+        sub: SubReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: { ignoredActions: [PERSIST], }, }, refreshTokenMiddleware ), 
 });
