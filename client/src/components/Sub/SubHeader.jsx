@@ -15,14 +15,14 @@ function SubHeader() {
         dispatch(getSubInfo(subName));
     }, [dispatch, subName]);
 
-    const {name, subPic, banner, joinedUsers, moderators, posts} = useMemo(() => {
-        subInfo || {name:null, subPic:null, banner:null, joinedUsers:[], moderators:[], posts:[]}, [subInfo]
-    })
+    const { name, banner, subPic} = useMemo(
+        () => subInfo || {}, [subInfo]
+      );
 
     return (
         <div className="w-full h-full relative rounded-[10px] md:p-4">
-            <div className=" bg-blue-300 w-full md:rounded-[5px] md:h-[100px] h-[50px] mb-2 md:mb-0">
-                <img src={banner} />
+            <div className=" bg-blue-300 w-full md:rounded-[5px] md:h-[140px] h-[50px] mb-2 md:mb-0 overflow-hidden">
+                <img src={banner} className="w-full md:h-[140px] h-[50px]" />
             </div>
             <div className="block md:flex md:relative items-center sm:items-end justify-between -top-[2.25rem] -mb-[2.25rem] sm:mt-0 mx-4 mt-2">
                 <div className="flex items-center md:items-end gap-4 justify-start md:mb-0 mb-2">
@@ -51,4 +51,5 @@ function SubHeader() {
     )
 }
 
-export default SubHeader;
+export default SubHeader;                
+

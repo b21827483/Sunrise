@@ -9,7 +9,7 @@ function Sub() {
 
     return (
         <div className="w-full h-full">
-            <div className="w-full h-[175px]">
+            <div className="w-full h-[200px]">
                 <SubHeader />
             </div>
             <div className="flex gap-2 w-full justify-between p-4">

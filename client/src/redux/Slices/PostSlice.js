@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getSubPosts = createAsyncThunk("post/getSubPosts", async (subPostsInfo, {rejectWithValue}) => {
+export const getSubPosts = createAsyncThunk("post/getSubPosts", async (subId, {rejectWithValue}) => {
     try {
-        const {subId} = subPostsInfo;
-        const response = await axios.get(`http://localhost:8800/posts/sub/:${subId}`);
+        const response = await axios.get(`http://localhost:8800/posts/sub/${subId}`);
         return response.data;
     }
     catch (err) {
@@ -16,7 +15,6 @@ const PostSlice = createSlice({
     name: "post",
     initialState: {
         posts:[],
-        savedPosts: [],
         postError: []
     },
     reducers: {
@@ -24,10 +22,12 @@ const PostSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getSubPosts.fulfilled, (state, action) => {
-            state.posts.concat(action.payload.posts);
+            state.posts = action.payload;
+            state.postError = null;
         }),
         builder.addCase(getSubPosts.rejected, (state, action) => {
             state.postError = action.payload;
+            state.posts = null;
         })
     }
 })

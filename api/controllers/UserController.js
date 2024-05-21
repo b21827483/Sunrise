@@ -7,6 +7,20 @@ import {Token} from "../models/Token.js";
 
 dotenv.config();
 
+export const getUser = async (req, res) => {
+    try {
+        const userId = req.params;
+        const user = await User.findById(userId);
+
+        const {username, profilePic} = user;
+
+        return res.status(200).json({username, profilePic});
+    }
+    catch (err) {
+        return res.status(500).json({message: "Error occured while fetching user."})
+    }
+}
+
 export const addUser = async (req, res, next) => {
     let newUser;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
