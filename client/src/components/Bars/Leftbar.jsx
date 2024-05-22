@@ -1,14 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 
-const DUMMY_SUBS = [
-    {
-        name: "TheSopranos",
-    },
-    {   name: "Better Call Saul"
-    }
-]
-
 function LeftBar({toggle}) {
     const [openSubs, setOpensubs] = useState(false);
     const [subs, setSubs] = useState([]);

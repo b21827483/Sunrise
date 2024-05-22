@@ -27,6 +27,7 @@ function App() {
           <Route path="/home" element={<Home />} /> 
           <Route path="/" element={<Home />} /> 
           <Route path='/sub/:subName' element={<Sub />} />
+          <Route path='/sub/:subName/submit' element={<Sub />} />
         </Route>
         <Route path='/signup' element={<Signup />} />
         <Route path='/signin' element={<Signin />} />

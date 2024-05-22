@@ -10,7 +10,6 @@ function MainSub() {
 
     const subInfo = useSelector(state => state.sub?.subInfo);
     const posts = useSelector(state => state.post?.posts);
-    console.log(posts)
 
     useEffect(() => {
         async function getPosts() {

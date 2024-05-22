@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { redirect, useNavigate, useParams } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import { getSubInfo } from "../../redux/Slices/SubSlice";
 
@@ -8,6 +8,9 @@ function SubHeader() {
     const dispatch = useDispatch();
 
     const {subName} = useParams();
+    const navigate = useNavigate();
+
+    const pathname = window.location.pathname;
 
     const subInfo = useSelector(state => state.sub?.subInfo);
 
@@ -15,9 +18,13 @@ function SubHeader() {
         dispatch(getSubInfo(subName));
     }, [dispatch, subName]);
 
+    const createPostHandler = () => {
+        navigate(`${pathname}/submit`);
+    }
+
     const { name, banner, subPic} = useMemo(
         () => subInfo || {}, [subInfo]
-      );
+      );  
 
     return (
         <div className="w-full h-full relative rounded-[10px] md:p-4">
@@ -31,7 +38,7 @@ function SubHeader() {
                 </div>
                 <div className="flex gap-2 mr-1">
                     <span className="flex items-end">
-                        <button className="flex items-center m-0 p-1 border-[2px] border-gray-300 hover:border-black">
+                        <button onClick={createPostHandler} className="flex items-center m-0 p-1 border-[2px] border-gray-300 hover:border-black">
                             <span className="mr-2">
                                 <svg rpl="" fill="currentColor" height="20" icon-name="add-outline" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19 9.375h-8.375V1h-1.25v8.375H1v1.25h8.375V19h1.25v-8.375H19v-1.25Z"></path>

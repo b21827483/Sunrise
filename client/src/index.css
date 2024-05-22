@@ -44,6 +44,16 @@ button {
   transition: border-color 0.25s;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+  .no-scrollbar {
+      -ms-overflow-style: none;  
+      scrollbar-width: none;  
+}
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
