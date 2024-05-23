@@ -52,13 +52,13 @@ function CreatePost() {
                               rows={1} 
                               value={postHeader} 
                               maxLength={300}
-                              className="w-full h-[40px] border-gray-100 border-[2px] no-scrollbar resize-none px-4 py-2" placeholder="Header"></textarea>
+                              className="w-full h-[40px] border-gray-100 border-[2px] no-scrollbar rounded-lg resize-none px-4 py-2" placeholder="Header"></textarea>
                     {options === "Post" ? <textarea id="post-content"
                                                 onChange={(e) => {const val = e.target.value; setPostContent(val)}}
                                                 ref={contentRef}
                                                 rows={20}
                                                 value={postContent} 
-                                                className="w-full h-[200px] border-gray-100 border-[2px] px-4 py-2"
+                                                className="w-full h-[200px] border-gray-100 border-[2px] rounded-lg px-4 py-2"
                                                 placeholder="Text (Optional)">
                                            </textarea> : <PostImagesVideo />}
                 </div>

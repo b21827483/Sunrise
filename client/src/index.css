@@ -44,7 +44,7 @@ button {
   transition: border-color 0.25s;
 }
 
-@layer utilities {
+@layer utilities {  
   .no-scrollbar::-webkit-scrollbar {
       display: none;
   }
